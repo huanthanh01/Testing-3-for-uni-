@@ -37,7 +37,7 @@ void check_num(int a, int rs[]) {
 		rs[0] = 1; //yes
 		rs[1] = mu;
 	} else {
-		rs[0] == 0; //no
+		rs[0] = 0; //no
 	}
 }
 
@@ -80,9 +80,10 @@ float sum_of(float x, int n) {
 
 //main
 int main() {
+	int option;
 	int opt;
 	do {
-		printf("-----MENU-----");
+		printf("\n-----MENU-----");
 		printf("\n1. Calculate income tax\n");
 		printf("2. Check whether a number is power of 2\n");
 		printf("3. Calculate the sum of the following series\n");
@@ -93,46 +94,103 @@ int main() {
 		switch (opt) {
 			case 1: {
 				//income tax
-				float ic, result;
-				printf("---Calculating income tax program---\n");
-				printf("Input your income per month: ");
-				scanf("%f", &ic);
-				result = cal_tax(ic);
-				if (result == -1) {
-					printf("error!\n");
-				} else {
-					printf("Your tax is %.1f\n", result);
-				}
+				do {
+					printf("\n---Calculating income tax program---\n");
+					printf("1. Execute program\n");
+					printf("2. Back to menu\n");
+					printf("You choose: ");
+					scanf("%d", &option);
+					switch (option) {
+						case 1: {
+							float ic, result;
+							printf("Input your income per month: ");
+							scanf("%f", &ic);
+							result = cal_tax(ic);
+							if (result == -1) {
+								printf("error!\n");
+							} else {
+								printf("Your tax is %.1f\n", result);
+							}
+							break;
+						}
+						case 2: {
+							printf("Backed\n");
+							break;
+						}
+						default: {
+							printf("Please input again\n");
+							break;
+						}
+					}
+				} while(option!=2);
 				break;
 			}
 			case 2: {
-				//power of 2
-				int num, res[2];
-				printf("---Check a number is power of 2---\n");
-				printf("Input your number(integer) from keyboard: \t");
-				scanf("%d", &num);
-				check_num(num, res);
-				if (res[0] == 1) {
-					printf("YES!! %d is power of 2\n", num);
-					printf("Because 2^%d = %d\n", res[1], num );
-				} else {
-					printf("NO!! %d is NOT power of 2\n", num);
-				}
+				do {
+					//power of 2
+					printf("\n---Check a number is power of 2---\n");
+					printf("1. Execute program\n");
+					printf("2. Back to menu\n");
+					printf("You choose: ");
+					scanf("%d", &option);
+					switch(option) {
+						case 1: {
+							int num, res[2];
+							printf("Input your number(integer) from keyboard: \t");
+							scanf("%d", &num);
+							check_num(num, res);
+							if (res[0] == 1) {
+								printf("YES!! %d is power of 2\n", num);
+								printf("Because 2^%d = %d\n", res[1], num );
+							} else {
+								printf("NO!! %d is NOT power of 2\n", num);
+							}
+							break;
+						}
+						case 2: {
+							printf("Backed\n");
+							break;
+						}
+						default: {
+							printf("Please input again\n");
+							break;
+						}
+					}
+				} while(option!=2);
 				break;
 			}
 			case 3: {
 				//sum of series
-				float result, a;
-				int b;
-				printf("---Calculate sum of series---\n");
-				printf("Input x & n from keyboard: \t\n");
-				scanf("%f%d", &a, &b);
-				result = sum_of(a,b);
-				if (result != -1) {
-					printf("Sum of series:  %f\n", result);
-				} else {
-					printf("Error!!\n");
-				}
+				do {
+					printf("\n---Calculate sum of series---\n");
+					printf("1. Execute program\n");
+					printf("2. Back to menu\n");
+					printf("You choose: ");
+					scanf("%d", &option);
+					switch (option) {
+						case 1: {
+							float result, a;
+							int b;
+							printf("Input x & n from keyboard: \t\n");
+							scanf("%f%d", &a, &b);
+							result = sum_of(a,b);
+							if (result != -1) {
+								printf("Sum of series:  %f\n", result);
+							} else {
+								printf("Error!!\n");
+							}
+							break;
+						}
+						case 2: {
+							printf("Backed\n");
+							break;
+						}
+						default: {
+							printf("Please input again\n");
+							break;
+						}
+					}
+				} while (option!=2);
 				break;
 			}
 			case 4: {
