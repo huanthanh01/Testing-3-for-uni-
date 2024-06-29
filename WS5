@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_LINE_LENGTH 100
+#define MAX_LINES 100
+
+int readFile(const char *filename, char lines[][MAX_LINE_LENGTH], float scores[]) {
+	FILE *file = fopen(filename, "r");
+	if (file == NULL) {
+		perror("Error opening file");
+		return -1;
+	}
+
+	int num_lines = 0;
+	while (fgets(lines[num_lines], MAX_LINE_LENGTH, file) && num_lines < MAX_LINES) {
+		num_lines++;
+	}
+
+	fclose(file);
+	return num_lines;
+}
+
+int main() {
+	const char *filename = "data_WS5.txt";
+	char lines[MAX_LINES][MAX_LINE_LENGTH]; // Assuming a maximum of 100 lines
+	float scores[MAX_LINES];
+	int num_lines;
+	
+	if (num_lines == -1) {
+		return 1; // Return with error code if file couldn't be opened
+	}
+	num_lines = readFile(filename, lines, scores);
+
+	// Print header
+	printf("%-20s %-10s %-5s\n", "Name", "ID", "Score");
+	printf("=======================================\n");
+
+	// Print each line in table format
+	for (int i = 0; i < num_lines; i++) {
+		char name[50], id[10];
+		float score;
+
+		// Parse each line
+		sscanf(lines[i], "%[^-] - %[^-] - %f", name, id, &score);
+
+		// Print the parsed data in table format
+		printf("%-20s %-10s %-5.1f\n", name, id, score);
+	}
+
+	return 0;
+}
